@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import employeesRoute from "./Routes/employees.js";
+import cors from "cors";
 const app = express();
 dotenv.config();
 
@@ -18,7 +19,7 @@ mongoose.connection.on("disconnected", () => {
   console.log("connection to the database has been disconnected");
 });
 
-
+app.use(cors());
 app.use(express.json());
 app.use("/api/employee", employeesRoute);
 app.listen(8000, () => {
