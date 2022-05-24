@@ -18,6 +18,12 @@ const Card = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.8s ease-in-out;
+  &:hover {
+    transform: translateX(0px) translateY(-5px);
+    cursor: pointer;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -27,13 +33,15 @@ const Wrapper = styled.div`
   align-items: center;
   width: 90%;
   height: 90%;
+
 `;
-const Image = styled.img`
+/* const Image = styled.img`
   width: 10rem;
   height: 10rem;
   margin: 1rem auto;
   border-radius: 50%;
-`;
+  
+`; */
 const InfoContainer = styled.div`
   width: 100%;
   height: 8rem;
@@ -42,7 +50,8 @@ const InfoContainer = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  color: black;
+  color: darnkgray;
+  font-weight: 300;
 `;
 const EditButton = styled.button`
   margin-top: 0.5rem;
@@ -74,6 +83,17 @@ const ButtonContainer = styled.div`
   justify-content: space-around;
 `;
 export default function Employee({ data }) {
+  const Image = styled.img`
+  width: 10rem;
+  height: 10rem;
+  margin: 1rem auto;
+  border-radius: 50%;
+  transition: all 0.8s ease-in-out;
+  box-shadow: 0px 0px 20px ${data.Gender==="Male"?"blue":data.Gender==="Female"?"#AA336A":""};
+  &:hover {
+    transform: scale(1.1);
+  }
+  `;
   const dispatch = useDispatch();
   const [hideEdit, setHideEdit] = useState(false);
   var d = new Date(data.DateOfBirth);

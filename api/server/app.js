@@ -22,7 +22,7 @@ mongoose.connection.on("disconnected", () => {
 app.use(cors());
 app.use(express.json());
 app.use("/api/employee", employeesRoute);
-app.listen(8000, () => {
+app.listen(process.env.PORT || 8000, () => {
   connect();
   console.log("BackEnd is live and running.");
 });
