@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEmployee } from "./redux/ducks/employee";
 import Employee from "./components/Employee";
 import styled from "styled-components";
-import AddModal from "./components/AddModal";
+import AddEmployeeModal from "./components/AddEmployeeModal";
 const Wrapper = styled.div`
   padding: 1rem;
   display: flex;
@@ -43,6 +43,18 @@ const SearchContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const Button = styled.button`
+  width: 10rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border:none;
+  background-color: green;
+  border-radius:0.5rem;
+  cursor: pointer;
+  color: white;
+`;
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -62,6 +74,7 @@ function App() {
           }}
         />
       </SearchContainer>
+      <Button onClick={()=>{setHideAdd(prev=>!prev)}}>Add New Employee</Button>
       <Wrapper>
         {employees
           ? employees
@@ -93,7 +106,7 @@ function App() {
               })
           : "Loading.."}
       </Wrapper>
-      {hideAdd ? <AddModal setHideAdd={setHideAdd} /> : ""}
+      {hideAdd ? <AddEmployeeModal setHideAdd={setHideAdd} /> : ""}
     </Container>
   );
 }

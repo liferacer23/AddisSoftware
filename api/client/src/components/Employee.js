@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import female from "../assets/female.png";
 import male from "../assets/male.png";
-import EditModal from "./EditModal";
+import EditEmployeeModal from "./EditEmployeeModal";
 const Card = styled.div`
   background: linear-gradient(
     rgba(256, 256, 256, 0.6),
@@ -87,7 +87,7 @@ export default function Employee({ data }) {
           </ButtonContainer>
         </Wrapper>
       </Card>
-      {hideEdit ? <EditModal data={data} setHideEdit={setHideEdit} /> : ""}
+      {hideEdit ? <EditEmployeeModal data={data} setHideEdit={setHideEdit} /> : ""}
     </>
   );
 }
