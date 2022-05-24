@@ -2,7 +2,6 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEmployee } from "./redux/ducks/employee";
-import Employee from "./components/Employee";
 import styled from "styled-components";
 import AddEmployeeModal from "./components/AddEmployeeModal";
 import EmployeesContainer from "./components/EmployeesContainer";
@@ -51,6 +50,10 @@ const HeaderContainer = styled.div`
   gap: 1rem;
   padding: 1rem;
   align-items: center;
+  @media screen and (max-width: 988px) {
+    
+    flex-direction: column;
+  }
 `;
 const FilterContainer = styled.div`
   width: 20%;
@@ -59,6 +62,8 @@ const FilterContainer = styled.div`
   align-items: center;
   justify-content: space-evenly;
   padding: 1rem;
+
+    
 `;
 const SortContainer = styled.div`
   width: 18%;
