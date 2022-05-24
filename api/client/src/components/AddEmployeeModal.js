@@ -1,4 +1,4 @@
-import { useRef,useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -18,7 +18,7 @@ const ModalOverLay = styled.div`
   width: 100%;
   inset: 0;
 `;
-const EditContainer = styled.div`
+const AddContainer = styled.div`
   background-color: white;
   position: absolute;
   height: 20rem;
@@ -49,19 +49,41 @@ const InputContainer = styled.div`
   align-items: center;
   padding: 0.5rem;
 `;
-const Button = styled.button`
+const SubmitButton = styled.button`
   margin-top: 0.5rem;
-  width: 3rem;
-  height: 1.5rem;
+  width: 4rem;
+  height: 2rem;
   padding: 5px;
   text-align: center;
   cursor: pointer;
   border: none;
+  background-color: #4287f5;
+  color: white;
+  border-radius: 0.5rem;
 `;
 const ButtonContainer = styled.div`
   display: flex;
   width: 85%;
   justify-content: center;
+`;
+const CloseButton = styled.button`
+  margin-top: 0.5rem;
+  width: 4rem;
+  height: 2rem;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  background-color: #f54242;
+  color: white;
+  border-radius: 1rem;
+`;
+
+const Header = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
 `;
 
 export default function AddEmployeeModal({ setHideAdd }) {
@@ -86,6 +108,7 @@ export default function AddEmployeeModal({ setHideAdd }) {
       console.log(err);
     }
     dispatch(getEmployee());
+    setHideAdd((prev) => !prev);
   };
 
   return (
@@ -96,11 +119,24 @@ export default function AddEmployeeModal({ setHideAdd }) {
           e.stopPropagation();
         }}
       ></ModalOverLay>
-      <EditContainer>
-        <Form action="">
-          <h4>Add a new Emloyee </h4>
+      <AddContainer>
+        <Form
+          onSubmit={(e) => {
+            handleAddEmployee(e);
+          }}
+        >
+          <Header>
+            <h4>Add Employee </h4>
+            <CloseButton
+              onClick={() => {
+                setHideAdd((prev) => !prev);
+              }}
+            >
+              Close
+            </CloseButton>
+          </Header>
           <InputContainer>
-            <label htmlFor="name">Date :</label>
+            <label htmlFor="name">DOB :</label>
             <Input
               required
               ref={DateOfBirth}
@@ -133,7 +169,9 @@ export default function AddEmployeeModal({ setHideAdd }) {
             <label htmlFor="gender">Gender :</label>
             <Input
               required
-              onChange={(e)=>{setGender(e.target.value)}}
+              onChange={(e) => {
+                setGender(e.target.value);
+              }}
               name="gender"
               type="radio"
               value="Male"
@@ -142,7 +180,9 @@ export default function AddEmployeeModal({ setHideAdd }) {
             <label htmlFor="male">Male</label>
             <Input
               required
-              onChange={(e)=>{setGender(e.target.value)}}
+              onChange={(e) => {
+                setGender(e.target.value);
+              }}
               name="gender"
               type="radio"
               value="Female"
@@ -151,17 +191,10 @@ export default function AddEmployeeModal({ setHideAdd }) {
             <label htmlFor="female">Female</label>
           </InputContainer>
           <ButtonContainer>
-            <Button
-              onClick={(e) => {
-                handleAddEmployee(e);
-                setHideAdd((prev) => !prev);
-              }}
-            >
-              Submit
-            </Button>
+            <SubmitButton>Submit</SubmitButton>
           </ButtonContainer>
         </Form>
-      </EditContainer>
+      </AddContainer>
     </ModalContainer>
   );
 }

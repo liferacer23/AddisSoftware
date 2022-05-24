@@ -3,14 +3,17 @@ import styled from "styled-components";
 import female from "../assets/female.png";
 import male from "../assets/male.png";
 import EditEmployeeModal from "./EditEmployeeModal";
+import { useDispatch } from "react-redux";
+import { getEmployee } from "../redux/ducks/employee";
+import axios from "axios";
 const Card = styled.div`
   background: linear-gradient(
     rgba(256, 256, 256, 0.6),
     rgba(256, 256, 256, 0.2)
   );
   border-radius: 1rem;
-  height: 20rem;
-  width: 20rem;
+  height: 22rem;
+  width: 22rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -41,21 +44,38 @@ const InfoContainer = styled.div`
   font-size: 1rem;
   color: black;
 `;
-const Button = styled.button`
+const EditButton = styled.button`
   margin-top: 0.5rem;
-  width: 3rem;
-  height: 1.5rem;
+  width: 4rem;
+  height: 2rem;
   padding: 5px;
   text-align: center;
   cursor: pointer;
   border: none;
+  background-color: #4287f5;
+  color:white;
+  border-radius:0.5rem;
+`;
+const DeleteButton = styled.button`
+  margin-top: 0.5rem;
+  width: 4rem;
+  height: 2rem;
+  padding: 5px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  background-color: #f54242;
+  color:white;
+  border-radius:0.5rem;
 `;
 const ButtonContainer = styled.div`
   display: flex;
-  width: 40%;
+  width: 45%;
   justify-content: space-around;
 `;
 export default function Employee({ data }) {
+
+  const dispatch = useDispatch();
   const [hideEdit, setHideEdit] = useState(false);
   var d = new Date(data.DateOfBirth);
 
@@ -63,7 +83,15 @@ export default function Employee({ data }) {
   var month = d.getMonth() + 1; // Since getMonth() returns month from 0-11 not 1-12
   var year = d.getFullYear();
   var newDate = date + "/" + month + "/" + year;
+  const handleDeleteEmployee = async () => {
 
+    try {
+      await axios.delete(`/employee/${data._id}`);
+    } catch (err) {
+      console.log(err);
+    }
+    dispatch(getEmployee());
+  };
   return (
     <>
       <Card>
@@ -76,14 +104,14 @@ export default function Employee({ data }) {
             <span>Gender: {data.Gender}</span>
           </InfoContainer>
           <ButtonContainer>
-            <Button
+            <EditButton
               onClick={() => {
                 setHideEdit((prev) => !prev);
               }}
             >
               Edit
-            </Button>
-            <Button>Delete</Button>
+            </EditButton>
+            <DeleteButton onClick={()=>{handleDeleteEmployee()}}>Delete</DeleteButton>
           </ButtonContainer>
         </Wrapper>
       </Card>
