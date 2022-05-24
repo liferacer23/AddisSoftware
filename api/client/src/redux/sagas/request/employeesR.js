@@ -7,3 +7,11 @@ return axios.request({
 });
 
 }
+export const requestCreateEmployee=(action)=>{
+return axios.request({
+    method:"post",
+    url:"/employee",
+    data:action.value
+});
+
+}
