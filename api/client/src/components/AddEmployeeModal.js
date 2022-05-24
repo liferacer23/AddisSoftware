@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { getEmployee } from "../redux/ducks/employee";
+import { addEmployee, getEmployee } from "../redux/ducks/employee";
 const ModalContainer = styled.div`
   position: fixed;
   inset: 0;
@@ -106,7 +106,8 @@ export default function AddEmployeeModal({ setHideAdd }) {
       await axios.post("/employee", employee);
     } catch (err) {
       console.log(err);
-    }
+    } 
+    //dispatch(addEmployee(employee));
     dispatch(getEmployee());
     setHideAdd((prev) => !prev);
   };

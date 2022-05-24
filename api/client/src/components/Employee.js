@@ -53,8 +53,8 @@ const EditButton = styled.button`
   cursor: pointer;
   border: none;
   background-color: #4287f5;
-  color:white;
-  border-radius:0.5rem;
+  color: white;
+  border-radius: 0.5rem;
 `;
 const DeleteButton = styled.button`
   margin-top: 0.5rem;
@@ -65,8 +65,8 @@ const DeleteButton = styled.button`
   cursor: pointer;
   border: none;
   background-color: #f54242;
-  color:white;
-  border-radius:0.5rem;
+  color: white;
+  border-radius: 0.5rem;
 `;
 const ButtonContainer = styled.div`
   display: flex;
@@ -74,7 +74,6 @@ const ButtonContainer = styled.div`
   justify-content: space-around;
 `;
 export default function Employee({ data }) {
-
   const dispatch = useDispatch();
   const [hideEdit, setHideEdit] = useState(false);
   var d = new Date(data.DateOfBirth);
@@ -84,7 +83,6 @@ export default function Employee({ data }) {
   var year = d.getFullYear();
   var newDate = date + "/" + month + "/" + year;
   const handleDeleteEmployee = async () => {
-
     try {
       await axios.delete(`/employee/${data._id}`);
     } catch (err) {
@@ -94,7 +92,8 @@ export default function Employee({ data }) {
   };
   return (
     <>
-      <Card>
+      <Card
+      >
         <Wrapper>
           <Image src={data.Gender === "Female" ? female : male} alt="" />
           <InfoContainer>
@@ -111,11 +110,21 @@ export default function Employee({ data }) {
             >
               Edit
             </EditButton>
-            <DeleteButton onClick={()=>{handleDeleteEmployee()}}>Delete</DeleteButton>
+            <DeleteButton
+              onClick={() => {
+                handleDeleteEmployee();
+              }}
+            >
+              Delete
+            </DeleteButton>
           </ButtonContainer>
         </Wrapper>
       </Card>
-      {hideEdit ? <EditEmployeeModal data={data} setHideEdit={setHideEdit} /> : ""}
+      {hideEdit ? (
+        <EditEmployeeModal data={data} setHideEdit={setHideEdit} />
+      ) : (
+        ""
+      )}
     </>
   );
 }
