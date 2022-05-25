@@ -103,7 +103,7 @@ export default function AddEmployeeModal({ setHideAdd }) {
     };
 
     try {
-      await axios.post("/employee", employee);
+      await axios.post("https://addisemployees.herokuapp.com/api/employee", employee);
     } catch (err) {
       console.log(err);
     } 

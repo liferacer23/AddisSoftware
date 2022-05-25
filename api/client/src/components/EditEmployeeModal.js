@@ -110,7 +110,7 @@ export default function EditEmployeeModal({ setHideEdit, data }) {
     };
 
     try {
-      await axios.put(`/employee/${data._id}`, employee);
+      await axios.put(`https://addisemployees.herokuapp.com/api/employee/${data._id}`, employee);
     } catch (err) {
       console.log(err);
     }

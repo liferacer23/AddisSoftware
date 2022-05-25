@@ -104,7 +104,7 @@ export default function Employee({ data }) {
   var newDate = date + "/" + month + "/" + year;
   const handleDeleteEmployee = async () => {
     try {
-      await axios.delete(`/employee/${data._id}`);
+      await axios.delete(`https://addisemployees.herokuapp.com/api/employee/${data._id}`);
     } catch (err) {
       console.log(err);
     }
