@@ -7,4 +7,5 @@ export function* watcherSaga(){
 
     yield takeLatest(GET_EMPLOYEES,handleGetEmployees);
     yield takeLatest(CREATE_EMPLOYEE,handleCreateEmployee);
+    
 }

@@ -11,7 +11,7 @@ export const requestCreateEmployee=(action)=>{
 return axios.request({
     method:"post",
     url:"https://addisemployees.herokuapp.com/api/employee",
-    data:action.value
+    data:action.emoployee
 });
 
 }

@@ -13,7 +13,7 @@ export function* handleGetEmployees(action) {
 }
 export function* handleCreateEmployee(action) {
   try {
-    const response = yield call(requestCreateEmployee, action.value);
+    const response = yield call(requestCreateEmployee(action));
     const { data } = response;
     yield put(addEmployee(data));
   } catch (err) {

@@ -51,7 +51,6 @@ const HeaderContainer = styled.div`
   padding: 1rem;
   align-items: center;
   @media screen and (max-width: 988px) {
-    
     flex-direction: column;
   }
 `;
@@ -62,8 +61,6 @@ const FilterContainer = styled.div`
   align-items: center;
   justify-content: space-evenly;
   padding: 1rem;
-
-    
 `;
 const SortContainer = styled.div`
   width: 18%;
@@ -134,19 +131,44 @@ function App() {
             id="female"
           />
           <label htmlFor="female">Females</label>
-    
         </FilterContainer>
         <SortContainer>
           <h4>Sort:</h4>
-          <input onChange={(e)=>{setSort(e.target.value)}} value="Salary" type="radio" name="gender" id="male" />
+          <input
+            onChange={(e) => {
+              setSort(e.target.value);
+            }}
+            value="Salary"
+            type="radio"
+            name="gender"
+            id="male"
+          />
           <label htmlFor="male">Salary</label>
-          <input onChange={(e)=>{setSort(e.target.value)}} value ="Name" type="radio" name="gender" id="female" />
+          <input
+            onChange={(e) => {
+              setSort(e.target.value);
+            }}
+            value="Name"
+            type="radio"
+            name="gender"
+            id="female"
+          />
           <label htmlFor="female">Name</label>
         </SortContainer>
       </HeaderContainer>
-    
-       <EmployeesContainer searchItem={searchItem} filter={filter} employees={sort ==="Salary"?employees.sort((a,b)=>(a.Salary> b.Salary ? 1: -1)):sort ==="Name"?employees.sort((a,b)=>(a.Name> b.Name ? 1: -1)):employees}/>
-     
+
+      <EmployeesContainer
+        searchItem={searchItem}
+        filter={filter}
+        employees={
+          sort === "Salary"
+            ? employees.sort((a, b) => (a.Salary > b.Salary ? 1 : -1))
+            : sort === "Name"
+            ? employees.sort((a, b) => (a.Name > b.Name ? 1 : -1))
+            : employees
+        }
+      />
+
       {hideAdd ? <AddEmployeeModal setHideAdd={setHideAdd} /> : ""}
     </Container>
   );

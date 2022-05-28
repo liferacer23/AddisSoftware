@@ -2,7 +2,7 @@ FROM node:16.13.1
 
 WORKDIR /server
 
-COPY package.json ./
+COPY . .
 
 RUN yarn install
 
